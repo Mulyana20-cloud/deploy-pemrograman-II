@@ -69,8 +69,14 @@
                     <a href="{{ route('shop', ['category' => $category->slug]) }}"
                        class="group flex min-h-[145px] flex-col items-center justify-center rounded-2xl bg-white px-3 py-6 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg sm:min-h-[165px] sm:rounded-3xl sm:p-7">
 
-                        <div class="mb-3 text-3xl transition duration-300 group-hover:scale-110 sm:mb-4 sm:text-4xl">
-                            ✨
+                        <div class="mb-3 h-16 w-16 overflow-hidden rounded-2xl bg-pink-50 shadow-sm border border-pink-100 transition duration-300 group-hover:scale-110 sm:mb-4 sm:h-20 sm:w-20">
+                            @if($category->image)
+                                <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}" class="h-full w-full object-cover">
+                            @else
+                                <div class="flex h-full w-full items-center justify-center text-pink-600 font-bold text-lg">
+                                    {{ substr($category->name, 0, 1) }}
+                                </div>
+                            @endif
                         </div>
 
                         <h3 class="text-sm font-semibold text-slate-900 sm:text-base">
@@ -109,7 +115,8 @@
 
                     @foreach($products as $product)
 
-                        <article class="flex min-w-0 flex-col overflow-hidden rounded-2xl bg-white shadow-sm transition duration-300 hover:shadow-lg sm:rounded-3xl">
+                        {{-- DITAMBAHKAN h-full AGAR TINGGI KARTU KONSISTEN --}}
+                        <article class="flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-sm transition duration-300 hover:shadow-lg sm:rounded-3xl">
 
                             {{-- Product Image --}}
                             <a href="{{ route('customer.products.show', $product->slug) }}"
@@ -130,41 +137,44 @@
 
                             </a>
 
-                            {{-- Product Information --}}
-                            <div class="flex flex-1 flex-col p-3 sm:p-4 lg:p-5">
+                            {{-- Product Information (DITAMBAHKAN flex-1 flex-col justify-between) --}}
+                            <div class="flex flex-1 flex-col justify-between p-3 sm:p-4 lg:p-5">
 
-                                <p class="truncate text-[10px] text-gray-400 sm:text-xs">
-                                    {{ $product->category->name ?? 'Beauty & Fashion' }}
-                                </p>
+                                <div>
+                                    <p class="truncate text-[10px] text-gray-400 sm:text-xs">
+                                        {{ $product->category->name ?? 'Beauty & Fashion' }}
+                                    </p>
 
-                                <h3 class="mt-1 line-clamp-2 min-h-9 text-sm font-semibold leading-snug text-slate-900 sm:mt-2 sm:min-h-12 sm:text-base">
-                                    {{ $product->name }}
-                                </h3>
+                                    {{-- DIBERIKAN min-height AGAR NAMA PRODUK YANG BEDA BARIS TETAP RATA --}}
+                                    <h3 class="mt-1 line-clamp-2 min-h-[2.5rem] text-sm font-semibold leading-snug text-slate-900 sm:mt-2 sm:min-h-[3rem] sm:text-base">
+                                        {{ $product->name }}
+                                    </h3>
 
-                                <div class="mt-2">
+                                    <div class="mt-2">
 
-                                    @if($product->discount_price)
+                                        @if($product->discount_price)
 
-                                        <p class="text-[10px] text-gray-400 line-through sm:text-xs">
-                                            Rp {{ number_format($product->price, 0, ',', '.') }}
-                                        </p>
+                                            <p class="text-[10px] text-gray-400 line-through sm:text-xs">
+                                                Rp {{ number_format($product->price, 0, ',', '.') }}
+                                            </p>
 
-                                        <p class="text-sm font-bold text-[#b76e79] sm:text-lg">
-                                            Rp {{ number_format($product->discount_price, 0, ',', '.') }}
-                                        </p>
+                                            <p class="text-sm font-bold text-[#b76e79] sm:text-lg">
+                                                Rp {{ number_format($product->discount_price, 0, ',', '.') }}
+                                            </p>
 
-                                    @else
+                                        @else
 
-                                        <p class="text-sm font-bold text-[#b76e79] sm:text-lg">
-                                            Rp {{ number_format($product->price, 0, ',', '.') }}
-                                        </p>
+                                            <p class="text-sm font-bold text-[#b76e79] sm:text-lg">
+                                                Rp {{ number_format($product->price, 0, ',', '.') }}
+                                            </p>
 
-                                    @endif
+                                        @endif
 
+                                    </div>
                                 </div>
 
                                 <a href="{{ route('customer.products.show', $product->slug) }}"
-                                   class="mt-auto inline-flex min-h-9 items-center justify-center rounded-lg border border-pink-300 px-2 py-2 text-center text-[11px] font-medium text-pink-600 transition hover:bg-pink-600 hover:text-white sm:mt-3 sm:min-h-10 sm:rounded-xl sm:text-sm">
+                                   class="mt-4 inline-flex min-h-9 w-full items-center justify-center rounded-lg border border-pink-300 px-2 py-2 text-center text-[11px] font-medium text-pink-600 transition hover:bg-pink-600 hover:text-white sm:min-h-10 sm:rounded-xl sm:text-sm">
                                     View Product
                                 </a>
 

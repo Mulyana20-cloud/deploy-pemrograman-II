@@ -38,7 +38,7 @@
                 {{-- Hero Image --}}
                 <div class="relative h-64 overflow-hidden sm:h-80 md:h-full md:min-h-[380px] lg:min-h-[460px]">
                     <img
-                        src="{{ asset('storage/banner/hero-beauty.jpg') }}"
+                        src="{{ asset('storage/app/public/banner/hero-beauty.jpg') }}"
                         alt="Premium Beauty Collection"
                         class="h-full w-full object-cover object-center"
                         fetchpriority="high"

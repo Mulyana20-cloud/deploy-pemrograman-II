@@ -69,15 +69,8 @@
                     <a href="{{ route('shop', ['category' => $category->slug]) }}"
                        class="group flex min-h-[145px] flex-col items-center justify-center rounded-2xl bg-white px-3 py-6 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg sm:min-h-[165px] sm:rounded-3xl sm:p-7">
 
-                        {{-- Category Image from Database --}}
-                        <div class="mb-3 h-16 w-16 overflow-hidden rounded-2xl bg-pink-50 shadow-sm border border-pink-100 transition duration-300 group-hover:scale-110 sm:mb-4 sm:h-20 sm:w-20">
-                            @if($category->image)
-                                <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}" class="h-full w-full object-cover">
-                            @else
-                                <div class="flex h-full w-full items-center justify-center text-pink-600 font-bold text-lg">
-                                    {{ substr($category->name, 0, 1) }}
-                                </div>
-                            @endif
+                        <div class="mb-3 text-3xl transition duration-300 group-hover:scale-110 sm:mb-4 sm:text-4xl">
+                            ✨
                         </div>
 
                         <h3 class="text-sm font-semibold text-slate-900 sm:text-base">

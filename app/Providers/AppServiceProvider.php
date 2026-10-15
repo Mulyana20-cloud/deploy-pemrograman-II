@@ -19,8 +19,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (str_ends_with(request()->getHost(), '.trycloudflare.com')) {
-            \Illuminate\Support\Facades\URL::forceScheme('https');
+        if (config('app.env') !== 'local') {
+            \URL::forceScheme('https');
         }
     }
 }

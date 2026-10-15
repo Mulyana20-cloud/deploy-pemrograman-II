@@ -12,15 +12,12 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-
         $middleware->alias([
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
         ]);
-
-        ->withMiddleware(function (Middleware $middleware) {
-            $middleware->trustProxies(at: '*');
-        })
-
+        
+        // Tambahkan trustProxies di sini agar menyatu
+        $middleware->trustProxies(at: '*');
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

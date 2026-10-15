@@ -10,7 +10,7 @@
 </head>
 <body class="bg-gray-100 font-sans antialiased" x-data="{ sidebarOpen: false }">
 
-    <div class="min-h-screen flex flex-col md:flex-row">
+    <div class="min-h-screen flex flex-col md:flex-row relative">
 
         <!-- Mobile Sidebar Overlay (Background gelap saat sidebar terbuka di HP) -->
         <div 
@@ -20,16 +20,16 @@
             x-transition.opacity
         ></div>
 
-        <!-- Sidebar (Responsive: Hidden di mobile, muncul jika sidebarOpen true, permanen di layar md ke atas) -->
+        <!-- Sidebar (Fixed di desktop, slide di mobile) -->
         <aside 
             :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
-            class="fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out md:translate-x-0 md:static md:inset-auto md:flex-shrink-0 flex flex-col"
+            class="fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out md:translate-x-0 flex flex-col"
         >
             @include('layouts.admin.sidebar')
         </aside>
 
-        <!-- Main Content Wrapper -->
-        <div class="flex-1 flex flex-col min-w-0 min-h-screen">
+        <!-- Main Content Wrapper (Ditambahkan md:ml-64 agar tidak tertutup sidebar) -->
+        <div class="flex-1 flex flex-col min-w-0 min-h-screen md:ml-64">
 
             <!-- Navbar / Header (Dilengkapi tombol hamburger untuk toggle sidebar di HP) -->
             <header class="bg-white shadow-sm sticky top-0 z-30 flex items-center justify-between px-4 py-3 md:px-6">
